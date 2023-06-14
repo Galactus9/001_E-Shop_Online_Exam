@@ -1,0 +1,128 @@
+﻿@using Microsoft.Extensions.Options
+@model IEnumerable<EShopOnlineExam.Models.CandidateCart>
+@inject IOptions<EShopOnlineExam.Utility.StripeSettings> Stripe
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Cart";
+    int? total = 0;
+}
+
+@{
+    var candId = -1;
+}
+
+
+<section class="h-100 h-custom" style="border-radius:25px; padding:20px; margin-top:1rem;">
+    <div class="container py-5 h-100 w-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <h5 class="mb-3">
+                    <i class="fas fa-long-arrow-alt-left me-2"></i><a class="btn btn-primary" asp-action="Index">Back to Certifications</a>
+                </h5>
+                <div class="card" style="border-radius:25px">
+                    <h5 class="card-header">You have <span id="cartCounter3"></span> items in your cart</></h5>
+                   
+
+                    <div class="card-body p-4" >
+                        <div class="row" >
+                            <div class="col-lg-7" >
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                </div>
+                                @foreach (var item in Model) 
+                                {
+                                    <div class="card mb-3 rounded-2">
+                                        <h4 class="card-header rounded-2" style="background-color: rgb(100, 150, 200,0.5); color:black;">@item.Certificates.Title</h4>
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <div>
+                                                    </div>
+                                                    <div class="ms-3">
+                                                        <h6>@Html.DisplayFor(modelitem => item.Certificates.Description)</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center card-footer rounded-2 ms-3">
+                                                    <div style="width: 80px;">
+                                                        @{
+                                                            total = total + item.Certificates.Price;
+                                                        }
+                                                        <h6 class="mb-0">@item.Certificates.Price €</h6>
+                                                    </div>
+                                                    <div style="width: 50px;">
+                                                        <a class="btn btn-outline-danger" asp-action="RemoveFromCart" asp-route-id="@item.Id">
+                                                            <i class="bi bi-x-lg" fill="currentColor"></i>
+                                                        </a>
+                                                    </div>
+                                                    <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card bg-white text-white" style="border-radius:25px">
+                                    <div class="card-header text-center mt-5 border-0 text-dark">
+                                        <h6 >Thank you for your interest in advancing your tech skills with us.</h6>
+                                    </div>
+                                    <div class="card-body text-center text-dark">
+                                            <h6 class="mb-0">
+                                            <p>Your certification journey is almost complete.</p>
+                                            <p class="bg-white">To finalize your enrollment, please proceed to payment.
+                                                Your payment information is secure with us and will not be shared with any third parties.
+                                                If you have any questions or concerns about the certification process, 
+                                                please don't hesitate to reach out to our support team. We're here to help you achieve your goals.
+                                            </p>
+                                            <p>
+                                                Thank you again for choosing us.
+                                                Best regards,
+                                                The Best<span style="color:red">Cert</span> Team.
+                                            </p>
+                                            </h6>
+   
+                                        
+
+                                    </div>
+
+                                </div>
+                                        <div class="container">
+                                            <div class="row mt-2">
+                                            <div class="d-flex justify-content-between">
+                                            <h4 class="mb-2 fw-bold">Total: </h4>
+                                            <h4 class="mb-2 fw-bold">@total€</h4>
+                                            </div>
+                                        </div>
+                                        </div>
+                                     <div class="container mt-2 mb-2">
+                                            <div class="row">
+                                        <a class="btn btn-primary col-md-4" asp-action="RemoveAll" asp-route-id="@candId">Empty Cart</a>
+                                                <form class="col-md-8" method="post" asp-action="Purchased">
+                                                    <button type="submit" value="Place Order" class="btn btn-success form-control">Proceed to checkout</button>
+                                                </form>
+                                            </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/js/jquery-3.5.1.js" type="text/javascript"></script>
+
+<script>
+    function setCart() {
+        $.ajax({
+            type: "GET",
+            url: "/CertificateShop/GetCartCount",
+            success: function (data) {
+
+                document.getElementById('cartCounter2').innerHTML = data.toString();
+                document.getElementById('cartCounter3').innerText = data.toString();
+
+            }
+        });
+    }
+    window.onload = setCart()
+</script>

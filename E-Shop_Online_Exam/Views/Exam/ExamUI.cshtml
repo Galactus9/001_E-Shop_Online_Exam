@@ -1,0 +1,417 @@
+﻿@model List<CandidateResults>
+@{
+    ViewData["Title"] = "Exam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var userName = User.Identity.Name;
+    var now = DateTime.Now;
+
+}
+<style>
+
+    .scrollbar-primary::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5;
+    }
+
+    .scrollbar-primary::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #4285F4;
+    }
+
+    .scrollbar-primary {
+        scrollbar-color: #4285F4 #F5F5F5;
+    }
+
+    .scrollbar {
+        height: 800px;
+        overflow-y: scroll;
+    }
+
+    .force-overflow {
+        min-height: 450px;
+    }
+</style>
+
+<div class="container" style="margin-top:2rem">
+    <div class="row" align="right">
+        <input hidden id="timeStamp" value="@Model.First().candidateExamination.timestamp" />
+        <h1>Timer: <span vlalue="1" id="timer"></span></h1>
+    </div>
+</div>
+
+<div class="row border border-success border-2" style="margin-top:6rem">
+    <div class="col-3 scrollbar scrollbar-primary">
+        <div class="row mb-3"></div>
+        @for (int i = 0; i < @Model.Count(); i++)
+        {
+            <div class="row" align="center">
+                <div class="col-2"></div>
+                <ul class="nav col-8 flex-column float-start nav-pills" id="questionsButtons">
+                    <li class="nav-item btn-group">
+                        @{
+                            var label = i + 1;
+                        }
+                        <button id="buttonId" data-bs-target="#carouselCrossfade" data-bs-slide-to=@i class="my-1 btn btn-outline-primary">Question @label</button>
+                        <i class="bi bi-flag h4 pt-4 ms-3" onclick="toggleIcon(this)"></i>
+                        <i class="bi bi-flag-fill h4 pt-4 visually-hidden ms-3" onclick="toggleIcon(this.previousElementSibling)"></i>
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="col-9" id="questionBody">
+        <div class="tab-content">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="tab-pane active" id="form1">
+                        <form action="ExamSubmit" method="post">
+                            @{
+                                var numOfQuestions = 1;
+                            }
+                            <div id="carouselCrossfade" style="margin-top:3rem" data-bs-interval="false" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <input hidden value="@Model.First().candidateExamination.Id" id="candidateExamId" />
+                                    <div class="carousel-item active" id="carousel{0}">
+                                        <div align="center">
+                                            <label asp-for="@Model[0].ExamQuestion.QuestionAnswer.TextOfQuestion" class="fw-bold h3">@Model[0].ExamQuestion.QuestionAnswer.TextOfQuestion</label>
+                                        </div>
+                                        <hr class="mb-5" />
+                                        <div class="h4" align="center">
+                                            @if (Model[0].CandidateQuestionAnswer == 1)
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" checked />
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" />
+                                            }
+                                            <label class="" for="formRadioDefault">@Model[0].ExamQuestion.QuestionAnswer.Answer1</label>
+
+                                        </div>
+                                        @{
+                                            numOfQuestions++;
+                                        }
+                                        <div class="h4" align="center">
+                                            @if (Model[0].CandidateQuestionAnswer == 2)
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" checked />
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" />
+                                            }
+                                            <label class="" for="formRadioChecked">@Model[0].ExamQuestion.QuestionAnswer.Answer2</label>
+                                        </div>
+                                        @{
+                                            numOfQuestions++;
+                                        }
+                                        <div class="h4" align="center">
+                                            @if (Model[0].CandidateQuestionAnswer == 3)
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" checked />
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" />
+                                            }
+                                            <label class="" for="formRadioDefault">@Model[0].ExamQuestion.QuestionAnswer.Answer3</label>
+                                        </div>
+                                        @{
+                                            numOfQuestions++;
+                                        }
+                                        <div class="h4" align="center">
+                                            @if (Model[0].CandidateQuestionAnswer == 4)
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" checked />
+                                            }
+                                            else
+                                            {
+                                                <input class="form-check-input" type="radio" name="@Model[0].Id" id="@numOfQuestions@Model[0].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[0].Id))" value="@(@numOfQuestions),@(@Model[0].Id)" />
+                                            }
+                                            <label class="" for="formRadioChecked">@Model[0].ExamQuestion.QuestionAnswer.Answer4</label>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    @for (int i = 1; i < @Model.Count(); i++)
+                                    {
+                                        <div class="carousel-item" id="carousel{@i}">
+                                            <div align="center">
+                                                <label asp-for="@Model[i].ExamQuestion.QuestionAnswer.TextOfQuestion" class="fw-bold h3">@Model[i].ExamQuestion.QuestionAnswer.TextOfQuestion</label>
+                                                <hr class="mb-5" />
+                                            </div>
+                                            @{
+                                                numOfQuestions = 1;
+                                            }
+                                            <div class="h4" align="center">
+                                                @if (Model[i].CandidateQuestionAnswer == 1)
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" />
+                                                }
+                                                <label class="" for="formRadioDefault">@Model[i].ExamQuestion.QuestionAnswer.Answer1</label>
+
+                                            </div>
+                                            @{
+                                                numOfQuestions++;
+                                            }
+                                            <div class="h4" align="center">
+                                                @if (Model[i].CandidateQuestionAnswer == 2)
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" />
+                                                }
+                                                <label class="" for="formRadioChecked">@Model[i].ExamQuestion.QuestionAnswer.Answer2</label>
+
+                                            </div>
+                                            @{
+                                                numOfQuestions++;
+                                            }
+                                            <div class="h4" align="center">
+                                                @if (Model[i].CandidateQuestionAnswer == 3)
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" />
+                                                }
+                                                <label class="" for="formRadioDefault">@Model[i].ExamQuestion.QuestionAnswer.Answer3</label>
+
+                                            </div>
+                                            @{
+                                                numOfQuestions++;
+                                            }
+                                            <div class="h4" align="center">
+                                                @if (Model[i].CandidateQuestionAnswer == 4)
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input class="form-check-input" type="radio" name="@Model[i].Id" id="@numOfQuestions@Model[i].Id" onclick="getA1Rates(@(@numOfQuestions)@(@Model[i].Id))" value="@(@numOfQuestions),@(@Model[i].Id)" />
+                                                }
+                                                <label class="" for="formRadioChecked">@Model[i].ExamQuestion.QuestionAnswer.Answer4</label>
+
+                                            </div>
+
+                                        </div>
+                                    }
+
+
+                                    <div class="offcanvas offcanvas-start" tabindex="-1" id="supportChat" aria-labelledby="supportChatLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 class="offcanvas-title" id="supportChatLabel">Support</h5>
+                                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        </div>
+                                        <div class="offcanvas-body">
+                                            <div>
+                                                Welcome to our support chat! Our team is here to assist you with any questions or issues you may have.
+                                                Please describe the problem you are experiencing and we will do our best to help you.
+                                            </div>
+
+                                            <div class="jumbotron bg-light">
+                                                <div class="row">
+                                                    <div class="col-md-12" id="chat">
+
+                                                        @if (Model != null)
+                                                        {
+                                                            @foreach (var message in ViewBag.Messages)
+                                                            {
+                                                                string containerClass, timePosition, textAlign, contcolor, offset;
+                                                                if (userName == message.UserName)
+                                                                {
+                                                                    containerClass = "container darker";
+                                                                    timePosition = "time-right text-light";
+                                                                    textAlign = "text-right text-white";
+                                                                    contcolor = "bg-primary";
+                                                                    offset = "col-md-8 offset-md-4";
+                                                                }
+                                                                else
+                                                                {
+                                                                    containerClass = "container";
+                                                                    timePosition = "time-left";
+                                                                    textAlign = "text-left";
+                                                                    contcolor = "bg-light";
+                                                                    offset = "col-md-8";
+                                                                }
+
+                                                                <div class="row">
+                                                                    <div class="@offset">
+                                                                        <div class="@containerClass @contcolor">
+                                                                            <p class="sender @textAlign">@message.UserName</p>
+                                                                            <p class="@textAlign">@message.Text</p>
+                                                                            <span class="@timePosition" id="when" name="when">@message.When.ToString()</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <form class="form" asp-action="Create"
+                                                                  data-ajax-begin="clearInputField" data-ajax-complete=""
+                                                                  data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+                                                                  data-ajax="true" data-ajax-method="POST">
+
+                                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                                <div class="form-group mb-3">
+                                                                    <input name="Text" class="form-control" id="messageText" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input name="submit" value="Send Message" id="submitButton" class="btn btn-primary" />
+                                                                </div>
+                                                                <input type="hidden" value="@userName" name="userName" />
+                                                                <input type="hidden" value="@now" name="now" />
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <hr />
+                    <div class="col-2">
+                        <button class="btn btn-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#supportChat" aria-controls="supportChat">
+                            Exam Support
+                        </button>
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="col-2">
+                        <button type="button" id="submitbtn" class="btn btn-success" onclick="location.href = '@Url.Action("ExamSubmit", "Exam", new { id = Model.First().candidateExamination.Id })'">Submit Answers</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function toggleIcon(icon) {
+        const icon1 = icon;
+        const icon2 = icon.nextElementSibling;
+
+        if (icon1.classList.contains('visually-hidden')) {
+            icon1.classList.remove('visually-hidden');
+            icon2.classList.add('visually-hidden');
+        } else {
+            icon1.classList.add('visually-hidden');
+            icon2.classList.remove('visually-hidden');
+        }
+    }
+</script>
+
+@*<script src="~/js/sampleExam.js"></script>
+*@
+
+@*<script src="~/js/extra.js"></script>*@
+@if (User.Identity.IsAuthenticated)
+{
+    <script>
+        const userName = "@ViewBag.CurrentUserName";
+        const now = "@now";
+    </script>
+}
+<script>
+    let examId = document.getElementById("candidateExamId").value;
+    let count = document.getElementById("timeStamp").value;
+
+    const timer = setInterval(() => {
+        const hours = Math.floor(count / 3600);
+        const minutes = Math.floor((count % 3600) / 60);
+        const seconds = count % 60;
+        $("#timer").text(`${hours}:${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`);
+        count--;
+        if (count === 0) {
+            clearInterval(timer);
+            $("#submitbtn").click();
+        }
+        if (count % 60 == 0) {
+            UpDate(count);
+        }
+    }, 1000);
+
+
+    function getA1Rates(var1) {
+        var this_element = $(var1)
+        var test = document.getElementById(var1).value;
+        $.ajax({
+            type: "POST",
+            //URL: "/Exam/ExamPost/",
+            URL: '@Url.Action("ExamPost", "Exam")',
+            data: { id: test },
+            dataType: "json",
+        });
+    }
+
+    function UpDate(tmp) {
+
+        $.ajax({
+            type: "POST",
+            URL: '@Url.Action("ExamPost", "Exam")',
+            data: { timeStamp: tmp, examId: examId },
+        })
+    }
+
+    document.getElementById('submitButton').onclick = function () {
+        console.log("i am called");
+        var Message = {};
+        Message.UserName = userName;
+        Message.Text = document.getElementById('messageText').value;
+
+        console.log(Message);
+        $.ajax({
+            url: "@Url.Action("Create","Home")",
+            data: { model: Message },
+            type: "Post",
+            success: function (result) {
+
+            },
+            error: function (result) {
+                allert("@@");
+            }
+        })
+    };
+
+    const buttons = document.querySelectorAll("#buttonId");
+    buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            buttons.forEach(function (b) {
+                b.classList.remove("active");
+            });
+            this.classList.add("active");
+        });
+    });
+
+
+</script>
+
+@section Scripts {
+    <script src="~/js/signalr.js"></script>
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/js/signalrReqHandler.js"></script>
+
+
+}

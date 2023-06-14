@@ -1,0 +1,189 @@
+﻿@model EShopOnlineExam.ViewModels.CertificateVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Certificate</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PossibleMarks)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PossibleMarks)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreNeededToPass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ScoreNeededToPass)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+
+
+    <br />
+    <br />
+        <h4>Topics</h4>
+    <hr />
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <h5>Topic Id</h5>
+                    </th>
+                    <th>
+                        <h5>Topic Title</h5>
+                    </th>
+                    <th>
+                        <h5>Topic Description</h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model.Topics)
+        {
+  
+            
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            
+        }
+            </tbody>
+        </table>
+<div id="container" hidden>
+
+    <br />
+    <br />
+        <h4>Exam Questions</h4>
+    <hr />
+
+<table id="example" class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                    @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Questions.First().Id)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Questions.First().TextOfQuestion)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Questions.First().Answer1)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Questions.First().Answer2)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Questions.First().Answer3)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Questions.First().Answer4)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var item in Model.Questions)
+            {
+                    <tr>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.TextOfQuestion)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Answer1)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Answer2)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Answer3)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Answer4)
+                        </td>
+                    </tr>
+            }
+    </tbody>
+</table>
+
+
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model?.Id">Edit</a> 
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    <a onclick="Fanc()" class="btn btn-primary">Show / Hide Exam Questions</a>
+
+</div>
+
+
+
+<script src="~/js/jquery-3.5.1.js" type="text/javascript"></script>
+<script src="~/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="~/js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
+
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        var table = $('#example').DataTable();
+    });
+</script>
+
+<script>
+    function Fanc()
+    {
+        console.log("hi");
+        var container = document.getElementById("container").hidden;
+        if(container)
+        {
+        console.log(container);
+            document.getElementById("container").hidden = false;
+        }else{
+            document.getElementById("container").hidden = true;
+        }
+    }
+</script>

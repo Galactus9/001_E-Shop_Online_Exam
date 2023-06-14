@@ -1,0 +1,74 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@model QcNoteModel
+@inject SignInManager<Candidate> SignInManager
+@inject UserManager<Candidate> UserManager
+@{
+    ViewData["Title"] = "Quality Control Reports";
+    //ViewData["ActivePage"] = ManageNavPages.;
+}
+@{
+    string adminName = UserManager.GetUserName(User);
+}
+<style>
+    td {
+        min-width: 8rem;
+    }
+</style>
+<partial name="_StatusMessage" for="StatusMessage" />
+<h4 class="">Reports</h4>
+<input class="form-control bg-light rounded-0" id="search" type="text" placeholder="Search..">
+<table class="table p-5 table-hover">
+    <thead>
+    <th>@Html.DisplayNameFor(model => model.QcNote.Id)</th>
+    <th>@Html.DisplayNameFor(model => model.QcNote.Text)</th>
+    <th>@Html.DisplayNameFor(model => model.QcNote.DateCreated)</th>
+    <th>@Html.DisplayNameFor(model => model.QcNote.PriorityLevel)</th>
+    <th>@Html.DisplayNameFor(model => model.QcNote.State)</th>
+    <th>Location</th>
+    <th>@Html.DisplayNameFor(model => model.QcNote.Supervisor)</th>
+    </thead>
+    <tbody id="qcnotes">
+        @foreach (var item in Model.QcNotes)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td class="text-wrap text-break">@item.Text</td>
+                <td>@item.DateCreated</td>
+                <td>@item.PriorityLevel</td>
+                <td>@item.State</td>
+                <td><a class="btn btn-secondary" href="@item.PageUrl">Go to</a></td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td class="col-6" style="min-width:10rem">
+                        <form method="post">
+                            <input id="Id" name="Id" value="@item.Id" hidden>
+                            <div class="btn-group w-auto">
+                                <button type="submit" class="btn btn-outline-info">@item.Supervisor</button>
+                                <button name="button" type="submit" class="btn btn-outline-success" id="closeReport" value="closeReport"><i class="bi bi-check-lg"></i></button>
+                            </div>
+                        </form>
+                    </td>
+                }
+                else
+                {
+                    <td>@item.Supervisor</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#qcnotes tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

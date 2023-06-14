@@ -1,0 +1,157 @@
+﻿@model List<EShopOnlineExam.Models.ExamTopics>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@{
+	ViewData["Title"] = "CreateExamTopic";
+
+}
+
+<h1>Edit</h1>
+
+<h4>Exam Topics</h4>
+<hr />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+<div class="position-relative m-4">
+            <div class="progress bg-secondary" style="height: 1px;">
+    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+  <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+  <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+</div>
+</div>
+</div>
+
+<div class="row">
+	<div class="col-2"></div>
+	<div class="col-8">
+		<form asp-action="EditExamTopicPost" method="Post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<div class="container">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+							<input asp-for="@Model[0].Exam.Certificate.Title" class="form-control" hidden />
+                            <input asp-for="@Model[0].Exam.Id" class="form-control" hidden />
+                            <span class="input-group-text" id="inputGroup-sizing-default">Certificate Title</span>
+                        </div>
+                        <input asp-for="@Model.First().Exam.Certificate.Title" type="text" class="form-control" style="width:50%;" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                </div>
+            </div>
+            <hr />
+			@for (var i = 0; i < Model.Count; i++)
+			{
+
+
+			<div class="container">
+              <div class="row">
+
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Exam Id</span>
+                      </div>
+                            <input asp-for="@Model[i].Exam.Id" type="text" class="form-control" style="width:50%;" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+                    </div>
+                    <label asp-for="@Model[i].Topic.Title" class="form-check-label" for="inlineCheckDefault">@Model[i].Topic.Title</label>
+                    <div class="input-group mb-3">
+                            <input asp-for="@Model[i].Exam.Id" class="form-control" hidden />
+                            <input asp-for="@Model[i].Id" class="form-control" hidden />
+                          <div class=" input-group-prepend  input-group-text">
+								@if (Model[i].SubjectWeight > 0)
+								{
+									<input class="form-check-input m-1" type="checkbox" autocomplete='off' checked name="check" value="true" id="subject{@i}">
+								} 
+								else if (Model[i].SubjectWeight == 0)
+								{
+									<input class="form-check-input m-1" type="checkbox" autocomplete='off'  name="check" value="true" id="subject{@i}">
+								}
+								<span id="inputGroup-sizing-default" class="">Subject Weight</span>
+                          </div>
+
+                            <input asp-for="@Model[i].Topic.Id" id="topic{@i}"  class="form-control" hidden />
+							@if (Model[i].SubjectWeight > 0)
+							{
+								<input asp-for="@Model[i].SubjectWeight" class="form-control" min="0" required id="weight{@i}" >
+							}
+							else if (Model[i].SubjectWeight == 0)
+							{
+								<input asp-for="@Model[i].SubjectWeight" class="form-control" min="0" required id="weight{@i}" disabled>
+							}
+						</div>
+				</div>
+			</div>
+
+
+
+
+
+				@*<div id="test" class="row">
+					<div class="form-group mb-4 col ">
+						<label asp-for="@Model[i].Topic.Title" class="form-control"></label>
+						<input asp-for="@Model[i].Topic.Title" disabled class="form-control" />
+						<input asp-for="@Model[i].Topic.Title" hidden />
+						<input asp-for="@Model[i].Exam.Id" class="form-control" hidden />
+						<input asp-for="@Model[i].Id" class="form-control" hidden />
+					</div>
+
+					<div class="form-check my-3 col-md">
+						@if (Model[i].SubjectWeight > 0)
+						{
+							<input class="form-check-input" type="checkbox" name="check" checked value="true" id="subject{@i}">
+							<label class="control-label">Subject Weight:</label>
+							<input asp-for="@Model[i].SubjectWeight" class="form-control" id="weight{@i}" />
+
+						}
+						else if (Model[i].SubjectWeight == 0)
+						{
+							<input class="form-check-input" type="checkbox" name="check" value="true" id="subject{@i}">
+							<label class="control-label">Subject Weight:</label>
+							<input asp-for="@Model[i].SubjectWeight" class="form-control" id="weight{@i}" hidden />
+
+						}
+						<span asp-validation-for="@Model[i].SubjectWeight" class="text-danger"></span>
+						<input asp-for="@Model[i].Topic.Id" class="form-control" hidden />
+					</div>
+				</div>*@
+				<hr />
+			}
+			<div class="form-group">
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Save and out" name="submitButton" class="btn btn-primary" />
+				<input type="submit" value="Edit questions" name="submitButton" class="btn btn-success" />
+				<a asp-action="Index" class="btn btn-primary">Back to List</a>
+			</div>
+		</form>
+	</div>
+</div>
+<br />
+
+
+
+@section Scripts {
+@{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+	<script>
+		$(".form-check-input").change(function () {
+			var id = $(this).attr("id");
+			var weightId = id.replace("subject", "weight");
+			if (this.checked) {
+				console.log(`#${weightId}`);
+				document.getElementById(weightId).disabled = false;
+				//document.getElementById(weightId).hidden = false;
+			}
+			else {
+				document.getElementById(weightId).disabled = true;
+				//document.getElementById(weightId).hidden = true;
+				document.getElementById(weightId).value = 0;
+			}
+		});
+	</script>
+}

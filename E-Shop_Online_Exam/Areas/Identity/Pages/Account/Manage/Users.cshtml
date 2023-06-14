@@ -1,0 +1,119 @@
+﻿@page
+@model UsersModel
+@{
+    ViewData["Title"] = "Users";
+    ViewData["ActivePage"] = ManageNavPages.Users;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+        <form method="post" id="">
+            <span class="counter pull-right"></span>
+            <table id="example" class="table table-hover table-bordered table-striped results">
+           @* <table class="table">*@
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Admin
+                        </th>
+                        <th>
+                            Marker
+                        </th>
+                        <th>
+                            Quality Control
+                        </th>
+                    </tr>
+                </thead>
+
+        <tbody id="tbody">
+
+            @for (int i = 0; i < Model.TempUsers.Count(); i++)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.TempUsers[i].UserName)
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input asp-route-id="@Model.TempUsers[i].Id" type="submit" name="checkBox" value="checkAdmin" hidden id="submitAdmin{@i}">
+                            @if (Model.UserRolesAdmin.Contains(Model.TempUsers[i]))
+                            {
+                                <input asp-route-id="@Model.TempUsers[i].Id" class="form-check-input" type="checkbox" id="checkAdmin{@i}" checked>
+                            }
+                            else
+                            {
+                                <input asp-route-id="@Model.TempUsers[i].Id" class="form-check-input" type="checkbox" id="checkAdmin{@i}">
+                            }
+                        </div>
+
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            @if (Model.UserRolesMarker.Contains(Model.TempUsers[i]))
+                            {
+                                <input asp-route-id="@Model.TempUsers[i].Id" class="form-check-input" type="checkbox" id="checkMarker{@i}" checked>
+                            }
+                            else
+                            {
+                                <input asp-route-id="@Model.TempUsers[i].Id" class="form-check-input" type="checkbox" id="checkMarker{@i}">
+                            }
+                            <input asp-route-id="@Model.TempUsers[i].Id" type="submit" name="checkBox" value="checkMarker" hidden id="submitMarker{@i}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            @if (Model.UserRolesQuality.Contains(Model.TempUsers[i]))
+                            {
+                                <input asp-route-id="@Model.TempUsers[i].Id" class="form-check-input" type="checkbox" id="checkQuality{@i}" checked>
+                            }
+                            else
+                            {
+                                <input asp-route-id="@Model.TempUsers[i].Id" class="form-check-input" type="checkbox" id="checkQuality{@i}">
+                            }
+                            <input asp-route-id="@Model.TempUsers[i].Id" type="submit" name="checkBox" value="checkQuality" hidden id="submitQuality{@i}">
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </form>
+
+    <script src="~/js/jquery-3.5.1.js" type="text/javascript"></script>
+    <script src="~/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
+
+
+     <script>$(document).ready(function () {
+        $.noConflict();
+        var table = $('#example').DataTable();
+    });</script>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(".form-check-input").change(function () {
+            var id = $(this).attr("id");
+            var submitId = id.replace("check", "submit");
+            if (this.checked) {
+                console.log(submitId);
+                document.getElementById(submitId).value += "Enable";
+                document.getElementById(submitId).click();
+            }
+            else if (!this.checked) {
+                console.log(submitId);
+                document.getElementById(submitId).value += "Disable";
+                document.getElementById(submitId).click();
+            }
+        });
+    </script>
+}

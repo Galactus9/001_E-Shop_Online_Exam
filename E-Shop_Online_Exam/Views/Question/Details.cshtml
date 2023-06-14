@@ -1,0 +1,102 @@
+﻿@model EShopOnlineExam.Models.QuestionAnswers
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+    <div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="row row-cols-1" >
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+    </dl>
+    <hr />
+        <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Topics.Certificate.Title)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Topics.Certificate.Title)
+            </dd>
+    </dl>
+        <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Topics.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Topics.Title)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TextOfQuestion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TextOfQuestion)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Answer1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Answer1)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Answer2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Answer2)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Answer3)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Answer3)
+        </dd>
+    </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Answer4)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Answer4)
+        </dd>
+    </dl>
+    <hr />
+        <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CorrectIndex)
+            </dt>
+            <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CorrectIndex)
+            </dd>
+    </dl>
+    <hr />
+    <a asp-action="ListOfQuestions" class="btn btn-primary">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a> 
+</div>
+
+
+
+
+

@@ -1,0 +1,289 @@
+﻿@model List<EShopOnlineExam.ViewModels.AddExamQuestionsVM>
+
+@{
+    ViewData["Title"] = "AddExamQuestions";
+    string topic = "";
+    int counter = 0;
+}
+
+<h1>Edit Exam Questions</h1>
+    <div class="col-md-12">
+<div class="position-relative m-4">
+  <div class="progress" style="height: 1px;">
+    <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+  <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+  <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+</div>
+</div>
+<form method="Get" action="Index" class="all">
+    <a class="btn btn-primary mt-2 mb-2" onclick="Clear()">Clear all Questions</a>
+    <input type="submit" value="Save Questions" id="makis" name="submitButton" class="btn btn-primary" />
+    <table class="table sticky-top bg-primary text-light">
+
+    <thead>
+        <tr >
+            <th class="col-1">
+
+            </th>
+            <th class="col-2">
+                    @Html.DisplayNameFor(model => model.First().Question.TextOfQuestion)
+            </th>
+            <th class="col-2">
+                    @Html.DisplayNameFor(model => model.First().Question.Answer1)
+            </th>
+            <th class="col-2">
+                    @Html.DisplayNameFor(model => model.First().Question.Answer2)
+            </th>
+            <th class="col-2"> 
+                    @Html.DisplayNameFor(model => model.First().Question.Answer3)
+            </th>
+            <th class="col-2">
+                    @Html.DisplayNameFor(model => model.First().Question.Answer4)
+            </th>
+            <th class="col-1">
+                    @Html.DisplayNameFor(model => model.First().Question.CorrectIndex)
+            </th>
+
+        </tr>
+    </thead>
+
+    </table>
+
+    <hr />
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <table class="table" id="@Model[i].ExamTopic.Topic.Id">
+            @if (topic != Model[i].Question.Topics.Title)
+            {
+                <thead >
+                    <tr>
+                        @{
+                            //counter = 0;
+                            topic = Model[i].Question.Topics.Title;
+                        }
+                        <th class="col-2">
+                            Topic Title
+                        </th>
+                        <th class="col-2">
+                            @topic
+                        </th>
+                        <th class="col-2">
+                            Subject Weight :
+                        </th>
+                        <th id="subjectWeight{@Model[i].ExamTopic.Topic.Id}" class="col-1">
+                            @Model[i].ExamTopic.SubjectWeight
+                        </th>
+                        <th class="col-2">
+                            Selected Questions :
+                        </th>
+                        <th class="col-1">
+                            <span id="counter{@Model[i].ExamTopic.Topic.Id}" value="@Model[i].ExamTopic.Topic.Id" name="alltopics" />
+                        </th>
+                        <th >
+
+                        </th>
+                        <input id="subjectweight{@Model[i].ExamTopic.Topic.Id}" class="subjectweight" name="@Model[i].ExamTopic.Topic.Id" value="@Model[i].ExamTopic.SubjectWeight" hidden>                 
+                    </tr>
+                </thead>
+              }
+              </table>
+              <table>
+            <tbody>
+                <tr>
+                    <td class="col-1">
+
+                        <input name="submitButton" value="change" id="submit{@i}" type="submit"  hidden/>
+                        <input name="topic" value="@Model[i].ExamTopic.Topic.Id" id="topic{@i}" hidden/>
+                        <input name="examTopic" value="@Model[i].ExamTopic.Id" id="examTopic{@i}" hidden/>
+                        <input name="exam" value="@Model[i].ExamTopic.Exam.Id"  id="exam{@i}" hidden>
+                        <input name="question" value="@Model[i].Question.Id"  id="question{@i}" hidden>
+                        <input class="@Model[i].ExamTopic.Topic.Id" name="status" id="status{@i}" hidden/>
+                        <input class="@Model[i].ExamTopic.Topic.Id" name="status" id="status{@i}" value="@Model[i].Status" hidden/>
+                        @if (Model[i].Status == "false")
+                        {
+                            <input asp-route-id="@Model[i].Question.Id" class="form-check-input" type="checkbox" id="check{@i}" name="questions{@Model[i].ExamTopic.Topic.Id}">
+                        }
+                        else if (Model[i].Status == "true")
+                        {
+
+                            <input asp-route-id="@Model[i].Question.Id" class="form-check-input" type="checkbox" checked id="check{@i}" name="questions{@Model[i].ExamTopic.Topic.Id}">
+                        }
+                    </td>
+                    <td class="col-2">
+                        @Html.DisplayFor(modelItem => Model[i].Question.TextOfQuestion)
+                    </td>
+                    <td class="col-2">
+                        @Html.DisplayFor(modelItem => Model[i].Question.Answer1)
+                    </td>
+                    <td class="col-2">
+                        @Html.DisplayFor(modelItem => Model[i].Question.Answer2)
+                    </td>
+                    <td class="col-2">
+                        @Html.DisplayFor(modelItem => Model[i].Question.Answer3)
+                    </td>
+                    <td class="col-2">
+                        @Html.DisplayFor(modelItem => Model[i].Question.Answer4)
+                    </td>
+                    <td class="col-1">
+                        @Html.DisplayFor(modelItem => Model[i].Question.CorrectIndex)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+            <hr />
+    }
+    </br>
+        <input type="submit" value="Save Questions" id="makis" name="submitButton" class="btn btn-primary"/>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+   
+
+        function Clear(){
+            document.getElementsByName('alltopics').forEach(item =>{
+                item.innerText = "0";
+
+            })
+
+            $(".form-check-input").prop("checked", false);
+
+             $.ajax({
+                    url: "@Url.Action("ExamQuestionManager","ExamCrud")",
+                    data: { stringData: "Clear", intData : document.getElementById("exam{1}").value },
+                    type: "Post",
+                    success: function(result){
+                    }, 
+             })
+
+        };
+
+    window.onload = function () {
+        var alltopics = document.getElementsByName('alltopics')
+
+        for(let topic of alltopics) {
+
+            var cId = topic.attributes.value.value;
+            var questions = document.getElementsByName('questions{' + cId + '}')
+            let sw = document.getElementById('subjectWeight{' + cId + '}').innerText;
+            let post = 1;
+            let count = 0;
+
+
+            for (let question of questions) {
+
+                if (question.checked) {
+
+                    count++;
+                }
+                if (count > sw) {
+                    post = 0;
+                    break
+                }
+            }
+
+            if (document.getElementById("counter{" + cId + "}").innerHTML.trim() == "")
+            {
+                document.getElementById("counter{" + cId + "}").innerHTML = count;
+            }
+        }
+    }
+
+    $(".form-check-input").change(function () {
+
+        var id = $(this).attr("id");
+        var statusId = id.replace("check", "status");
+        var topicId = id.replace("check", "topic");
+        var examTopicId = id.replace("check", "examTopic");
+        var examId = id.replace("check", "exam");
+        var questionId = id.replace("check", "question");
+        var sumbitId = id.replace("check", "submit");
+
+        if (this.checked) {
+            var cId = document.getElementById(topicId).value;
+            var topic = document.getElementById(statusId).className
+            var sw = document.getElementById('subjectweight{' + topic + '}').value
+
+
+            var questions = document.getElementsByClassName(topic)
+            let post = 1;
+            let count = 0;
+
+
+            for (let question of questions) {
+
+                if (question.nextElementSibling.checked) {
+
+                    count++;
+                }
+                if (count > sw) {
+                    post = 0;
+                    break
+                }
+            }
+
+            if (post) {
+
+                document.getElementById("counter{" + cId + "}").innerHTML = count;
+                document.getElementById(statusId).value = "true";
+                var AddExamQuestionsVM = {};
+                AddExamQuestionsVM.Status = document.getElementById(statusId).value;
+                AddExamQuestionsVM.TopicId = document.getElementById(topicId).value;
+                AddExamQuestionsVM.ExamTopicId = document.getElementById(examTopicId).value;
+                AddExamQuestionsVM.ExamId = document.getElementById(examId).value;
+                AddExamQuestionsVM.QuestionId = document.getElementById(questionId).value;
+
+
+
+                $.ajax({
+                    url: "@Url.Action("ExamQuestionManager","ExamCrud")",
+                    data: { model: AddExamQuestionsVM },
+                    type: "Post",
+
+
+                })
+            } else {
+                console.log(id)
+                document.getElementById(id).checked = false;
+                alert("Error")
+
+            }
+        }
+        else if (!this.checked) {
+
+
+            var cId = document.getElementById(topicId).value;
+            //console.log(document.getElementById("counter{" + cId + "}").innerHTML)
+            var count = document.getElementById("counter{" + cId + "}").innerHTML
+            count--;
+            document.getElementById("counter{" + cId + "}").innerHTML = Math.abs(count);
+
+
+
+            document.getElementById(statusId).value = "false";
+
+            var AddExamQuestionsVM = {};
+            AddExamQuestionsVM.Status = document.getElementById(statusId).value;
+            AddExamQuestionsVM.TopicId = document.getElementById(topicId).value;
+            AddExamQuestionsVM.ExamTopicId = document.getElementById(examTopicId).value;
+            AddExamQuestionsVM.ExamId = document.getElementById(examId).value;
+            AddExamQuestionsVM.QuestionId = document.getElementById(questionId).value;
+
+            $.ajax({
+                url: "@Url.Action("ExamQuestionManager","ExamCrud")",
+                data: { model: AddExamQuestionsVM },
+                type: "Post",
+                success: function (result) {
+
+                },
+                error: function (result) {
+                    allert("@@");
+                }
+            })
+        }
+    });
+</script>
+
+

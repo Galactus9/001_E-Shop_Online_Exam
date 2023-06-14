@@ -1,0 +1,100 @@
+﻿@model EShopOnlineExam.Models.Exam
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Delete</h1>
+
+<div>
+    <h4>Exam</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Certificate.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Certificate.Id)
+        </dd>        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Certificate.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Certificate.Title)
+        </dd>        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExamDuration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExamDuration)
+        </dd>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h5>Exam Topic Id</h5>
+                    </th>
+                    <th>
+                        <h5>Topic Id</h5>
+                    </th>
+                    <th>
+                        <h5>Topic Title</h5>
+                    </th>
+                    <th>
+                        <h5>Topic Subject Weight</h5>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Topic)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubjectWeight)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </dl>
+</div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    <button type="button" class="btn btn-primary" onclick="Question()">Exam Questions</button>
+    </form>
+
+<div id="container">
+
+</div>
+            <script>
+                function Question(){
+                    $.ajax({
+                        url: '@Url.Action("_PartialExamQuestions", "ExamCrud",new{id = Model.Id})',
+                        type: 'GET',
+                        success: function (result) 
+                        {
+                            $('#container').append(result);
+                        }
+                    });
+                }
+            </script>

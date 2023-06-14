@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .carousel-item {
+        height: 40rem;
+    }
+
+    .card, .card-header, .card-body, .card-footer {
+        background: none;
+        border: none;
+    }
+
+    a {
+        color: rgb(81, 135, 121);
+    }
+
+        a:hover {
+            color: rgb(81, 179, 121);
+        }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<hr />
+<br />
+<div id="homeCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel" style="height:40rem;">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="home 1"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="home 1"></button>
+        <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2" aria-label="home 1"></button>
+    </div>
+    <div class="carousel-inner h-100 pt-5">
+        <div class="carousel-item active text-center carouselImg1">
+            <div class="card">
+                <div class="card-header my-3">
+                    <h3 style="color:rgb(36, 37, 45); padding-top:50px">
+                        Languages
+                    </h3>
+                </div>
+                <a href="#languages">
+                    <div class="card-body my-3">
+                        <h5 style="width:50%;margin:auto;">
+                            Become fluent in your chosen language and stand out in the global
+                            market with our language certifications.
+                        </h5>
+                    </div>
+                    <div class="card-footer my-3">
+                        <h4 class="text-decoration-underline w-25 m-auto">Become fluent in your choice of language and boost your career prospects.</h4><br /><br />
+                        <p>Get certified in the most in-demand languages.</p>
+                    </div>
+            </div>
+            </a>
+        </div>
+        <div class="carousel-item text-center carouselImg2">
+            <div class="card w-50" style="width:auto">
+                <div class="card-header my-3">
+                    <h3 style="color:rgb(36, 37, 45);margin-right:auto;padding-top:50px;">
+                        Project Manager
+                    </h3>
+                </div>
+                <a href="#projectManager">
+                    <div class="card-body my-3">
+                        <h5 style="color:rgb(36, 37, 45)">
+                            Explore and purchase top-rated project management courses.
+                        </h5>
+                    </div>
+                    <div class="card-footer my-3">
+                        <div class="w-50 m-auto">
+                            <h4 class="text-decoration-underline w-auto">Become a certified project manager and lead your team to success.</h4>
+                        </div>
+                    </div>
+            </div>
+            </a>
+        </div>
+        <div class="carousel-item text-center carouselImg3">
+            <div class="card w-50 " style="width:auto">
+                <div class="card-header my-3 text-light">
+                    <h3 style="margin-right:auto;padding-top:50px;" class="text-light">
+                        Coding
+                    </h3>
+                </div>
+                <a href="#coding">
+                    <div class="card-body my-3 text-light">
+                        <h5>
+                            Whether you're a complete beginner or an experienced developer,
+                            there is always something new to learn when it comes to coding.
+                        </h5>
+                    </div>
+                    <div class="card-footer my-3 text-light">
+                        <div class="w-50 m-auto">
+                            <h4 class="text-decoration-underline w-auto">Become a certified project manager and lead your team to success.</h4>
+                        </div>
+                    </div>
+            </div>
+            </a>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev" style="filter: invert(100%)">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next" style="filter: invert(100%)">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div style="height:15rem">
+</div>
+<div class="row my-5">
+    <div class="col-6">
+        <section id="languages">
+            <h5>
+                Our courses cover a variety of languages!</br></br>
+                Including <strong>Spanish</strong>, <strong>French</strong>, <strong>German</strong>, and <strong>Chinese</strong>, and are taught by native speakers.</br></br>
+                You'll learn the fundamentals of grammar, vocabulary, and pronunciation, as well as the cultural aspects of each language.</br></br
+                Our certifications are recognized by employers worldwide and are a great way to boost your career prospects or simply enhance your language skills for personal growth.
+            </h5>
+        </section>
+    </div>
+    <div class="col-6">
+        <img class="transitionImg" src="./Image/languages2.jpg" />
+    </div>
+</div>
+<hr />
+<div class="row my-5">
+    <div class="col-6">
+        <section id="projectManager">
+            <h5>
+                Get certified as a project manager and take your career to new heights!</br></br>
+                Our certifications provide a comprehensive education in project management methodologies and best practices, including <strong>Agile</strong>, <strong>Waterfall</strong>, and <strong>Scrum</strong>.</br></br>
+                You'll learn how to effectively plan, execute, and monitor projects, and how to lead a team to success.</br></br>
+                Our courses are taught by experienced project managers and include hands-on exercises, real-world case studies, and interactive simulations, giving you the skills and confidence to manage any project, big or small.
+            </h5>
+        </section>
+    </div>
+    <div class="col-6">
+        <img class="transitionImg" src="./Image/projectManager2.jpg" />
+    </div>
+</div>
+<hr />
+<div class="row my-5">
+    <div class="col-6">
+        <section id="coding">
+            <h5>
+                Are you ready to take your coding skills to the next level? </br></br>
+                Our certifications will help you master the latest programming languages and technologies, such as <strong>Python</strong>, <strong>Java</strong>, and <strong>JavaScript</strong>.</br></br>
+                Our comprehensive curriculum is designed by industry experts and covers everything from basics to advanced topics, giving you the confidence to tackle any coding challenge.</br></br>
+                Whether you're a beginner looking to break into the tech industry or an experienced developer seeking to expand your skills, our certifications are the perfect solution for you.
+            </h5>
+        </section>
+    </div>
+    <div class="col-6">
+        <img class="transitionImg" src="./Image/coding2.jpg" />
+    </div>
+</div>
+<hr />
+

@@ -1,0 +1,203 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');
+/*---------------------------------*/
+.card-columns {
+    @include media-breakpoint-only(lg) {
+        column-count: 4;
+    }
+
+    @include media-breakpoint-only(xl) {
+        column-count: 5;
+    }
+}
+
+* {
+    font-size: 18px;
+}
+
+
+
+body {
+    min-height: 100%;
+    background-image: linear-gradient(rgb(190, 220, 200,0.5), rgb(255, 255, 255));
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+/*------------Carousel Index-----------------------*/
+.carouselImg1 {
+    color: rgb(24, 21, 24);
+    mix-blend-mode: normal;
+    box-shadow: inset 0 0 0 100vw rgba(0,0,0,0.1);
+    background-image: url(../Image/image1.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.carouselImg2 {
+    color: rgb(24, 21, 24);
+    mix-blend-mode: normal;
+    box-shadow: inset 0 0 0 100vw rgba(0,0,0,0.1);
+    background-image: url(../Image/image4.jpg);
+    background-size: cover;
+    background-position: initial;
+}
+.carouselImg3 {
+    color: rgb(24, 21, 24);
+    mix-blend-mode: normal;
+    box-shadow: inset 0 0 0 100vw rgba(0,0,0,0.1);
+    background-image: url(../Image/image5.jpg);
+    background-size: cover;
+    background-position: initial;
+}
+/*----------Images transition index-------------*/
+.transitionImg {
+    mix-blend-mode: luminosity;
+    transition: mix-blend-mode;
+}
+
+.transitionImg:hover {
+    mix-blend-mode: normal;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+}
+main {
+    margin-bottom: 100px;
+    padding-bottom: 20px;
+}
+
+footer {
+    height: 300px;
+}
+footer > ul {
+    display:none;
+}
+.list-group > li{
+    background-color:transparent;
+    color:mistyrose;
+    border:none;
+    width:auto;
+}
+.list-group > li:not(:first-child):hover {
+    color: darkorange;
+    cursor: pointer
+    
+}
+li > i{
+    color:lightseagreen
+}
+#socialLinks > i:hover{
+    cursor:pointer;
+}
+.bi-facebook:hover{
+    color:darkblue;
+}
+.bi-youtube:hover{
+    color:darkred;
+}
+.bi-twitter:hover{
+    color:darkcyan;
+}
+.bi-instagram:hover{
+    color:orchid;
+}
+
+
+/* Chat containers */
+#chat .container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    font-family: "Open Sans", serif;
+}
+
+#chat .sender {
+    font-size: 0.8em;
+    font-weight: bold;
+    font-family: 'Open Sans', cursive;
+}
+
+/* Darker chat container */
+#chat .darker {
+    border-color: #fff;
+    background-color: #007bff;
+}
+
+/* Clear floats */
+#chat .container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Style images */
+#chat .container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+    /* Style the right image */
+    #chat .container img.right {
+        float: right;
+        margin-left: 20px;
+        margin-right: 0;
+    }
+
+/* Style time text */
+#chat .time-right {
+    float: right;
+    color: #aaa;
+}
+
+/* Style time text */
+#chat .time-left {
+    float: left;
+    color: #999;
+}

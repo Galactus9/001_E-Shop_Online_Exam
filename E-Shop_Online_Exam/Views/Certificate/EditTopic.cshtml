@@ -1,0 +1,116 @@
+﻿@model List<EShopOnlineExam.Models.Topic>
+
+@{
+    ViewData["Title"] = "EditTopic";
+    var topicId = "";
+}
+
+<h1>Edit Topic</h1>
+
+<h4>Topic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="position-relative m-4">
+            <div class="progress bg-secondary" style="height: 1px;">
+                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+            <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+            <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form asp-action="EditTopic" method="post">
+
+           <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+
+              @for (int i = 0; i < @Model.Count(); i++)
+              {
+                   <input asp-for="@Model[i].Certificate.Id" hidden/>
+                    topicId = "id" + @Model[i].Id.ToString();
+                    if (i == 0)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#@topicId" aria-selected="true" role="tab">Topic @Model[i].Id</a>
+                        </li>
+                    }
+                    else
+                    {                       
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#@topicId" aria-selected="false" role="tab" tabindex="-1">Topic @Model[i].Id</a>
+                        </li>
+                    }
+              }
+            </ul>
+
+
+           <div id="myTabContent" class="tab-content mb-3">
+                @for (int i = 0; i < @Model.Count(); i++)
+                {
+                    @if (i == 0)
+                    {
+                        <input asp-for="@Model[i].Id" class= "form-control" hidden/>
+                        topicId = "id" + @Model[i].Id.ToString();
+                        <div class="tab-pane fade show active" id="@topicId" role="tabpanel">
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Certificate.Title" class="control-label"></label>
+                                <input asp-for="@Model[i].Certificate.Title" class="form-control" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Title" class="control-label"></label>
+                                <input asp-for="@Model[i].Title" class="form-control" />
+                                <span asp-validation-for="@Model[i].Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Description" class="control-label"></label>
+                                <input asp-for="@Model[i].Description" class="form-control" />
+                                <span asp-validation-for="@Model[i].Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <input asp-for="@Model[i].Id" class="form-control" hidden />
+                        topicId = "id" + @Model[i].Id.ToString();
+                        <div class="tab-pane fade" id="@topicId" role="tabpanel"
+                                                    aria-labelledby="pills-Certificates-tab">
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Certificate.Title" class="control-label"></label>
+                                <input asp-for="@Model[i].Certificate.Title" class="form-control" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Title" class="control-label"></label>
+                                <input asp-for="@Model[i].Title" class="form-control" />
+                                <span asp-validation-for="@Model[i].Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Description" class="control-label"></label>
+                                <input asp-for="@Model[i].Description" class="form-control" />
+                                <span asp-validation-for="@Model[i].Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                    }
+                }
+           </div>
+
+           <div class="form-group mb-2">
+                <input type="submit" name="submitButton" style="float:right" value="Save All" class="btn btn-success" />
+                <input type="submit" name="submitButton" value="Edit Questions" class="btn btn-primary" />
+            </div>
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

@@ -1,0 +1,71 @@
+﻿@model List<EShopOnlineExam.Models.CandidateResults>
+
+@{
+    ViewData["Title"] = "MarkerTask";
+}
+
+<h1>Marker Task</h1>
+<hr />
+<div class="col-12 mb-3">
+    <br />Candidate Question Result: result is what the candidate has assigned during the exam process.
+     <br />The Marker can alter the Result of the Candidate Question.
+     <br />If a Candidate Answer to Question is -1, the question wasn't answered.
+     <br /> Correct = Pass | Wrong = Fail | Unmarked = Question wasn't answered
+
+
+</div>
+<hr />
+<form class="form" asp-action="TaskPost" method="post">
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.First().ExamQuestion.QuestionAnswer.TextOfQuestion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.First().ExamQuestion.QuestionAnswer.CorrectIndex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.First().CandidateQuestionAnswer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.First().QuestionResult)
+            </th> 
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i<Model.Count(); i++) 
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].ExamQuestion.QuestionAnswer.TextOfQuestion)
+                    <input asp-for="@Model[i].ExamQuestion.Id" hidden >
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].ExamQuestion.QuestionAnswer.CorrectIndex)
+                    <input asp-for="@Model[i].candidateExamination.Id" hidden>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].CandidateQuestionAnswer)
+                    <input asp-for="@Model[i].CandidateQuestionAnswer" hidden>
+                    <input asp-for="@Model[i].Id" hidden>
+                </td>
+                <td>
+                    <select class="form-control" asp-for="@Model[i].QuestionResult">
+                        <option value="-1">Unmarked</option>
+                        <option value="1">Correct</option>
+                        <option value="0">Wrong</option>
+                    </select>
+                </td> 
+            </tr>
+        }
+        
+    </tbody>
+</table>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+</form>

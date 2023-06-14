@@ -1,0 +1,87 @@
+﻿@model EShopOnlineExam.Models.CertTopicViewModel
+
+@{
+    ViewData["Title"] = "Create Topic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create Certificate Topic</h1>
+
+<h4>Topic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+<div class="position-relative m-4">
+            <div class="progress bg-secondary" style="height: 1px;">
+    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+  <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+  <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form asp-action="CreateCertificateTopic" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Certificate.Id" class="control-label" hidden></label>
+                <input asp-for="Certificate.Id"  class="form-control" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Certificate.Title" class="control-label" hidden></label>
+                <input asp-for="Certificate.Title"  class="form-control" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Certificate.Description" class="control-label" hidden></label>
+                <input asp-for="Certificate.Description"   class="form-control" hidden />
+            </div>
+                        <div class="form-group">
+                <label asp-for="Certificate.PossibleMarks" class="control-label" hidden></label>
+                <input asp-for="Certificate.PossibleMarks"  class="form-control" hidden />
+            </div>
+                        <div class="form-group">
+                <label asp-for="Certificate.ScoreNeededToPass" class="control-label" hidden></label>
+                <input asp-for="Certificate.ScoreNeededToPass"  class="form-control" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Certificate.State" class="control-label" hidden></label>
+                <input asp-for="Certificate.State"  class="form-control" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Certificate.Price" class="control-label" hidden></label>
+                <input asp-for="Certificate.Price"  class="form-control" hidden/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Certificate.Title" class="control-label"></label>
+                <input asp-for="Certificate.Title" disabled class="form-control" required/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Topic.Title" class="control-label" ></label>
+                <input asp-for="Topic.Title" class="form-control" value="" required />
+                <span asp-validation-for="Topic.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.Description" class="control-label"></label>
+                <input asp-for="Topic.Description" class="form-control" value="" required />
+                <span asp-validation-for="Topic.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               @* <a class="btn btn-primary form-control" asp-action="CreateBack">Back</a>*@
+                @*<button style="float:left" type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("CreateCertificateTopicQuestions", "Certificate", Model.Certificate.Id)'">Back2</button>              *@
+                <br />
+                <input style="float:right" name="submitButton" type="submit" value="Save and out" class="btn btn-primary" />
+                <input style="float:left" name="submitButton" type="submit" value="Add another Topic" class="btn btn-primary" />
+                <br/><br /><br />
+                <input style="float:left" name="submitButton" type="submit" value="Add Questions" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

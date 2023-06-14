@@ -1,0 +1,64 @@
+﻿@model EShopOnlineExam.Models.Certificate
+
+@{
+    ViewData["Title"] = "CreateBack";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CreateBack</h1>
+
+<h4>Certificate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="CreateCertificateTopic" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PossibleMarks" class="control-label"></label>
+                <input asp-for="PossibleMarks" class="form-control" />
+                <span asp-validation-for="PossibleMarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScoreNeededToPass" class="control-label"></label>
+                <input asp-for="ScoreNeededToPass" class="form-control" />
+                <span asp-validation-for="ScoreNeededToPass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <select asp-for="State" class="form-control">
+                    <option value="1">Enabled</option>
+                    <option value="2">Disabled</option>
+                </select>
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div id="container"></div>
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <button type="button" class="btn btn-primary" onclick="Topic()">Add Topic</button>
+        @*<button type="button" class="btn btn-primary" onclick="Question()">Add Question</button>*@
+        @*<button type="submit" class="btn btn-primary">submit</button>*@
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

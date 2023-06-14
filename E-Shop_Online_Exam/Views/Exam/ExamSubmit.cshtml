@@ -1,0 +1,92 @@
+﻿@model EShopOnlineExam.Models.CandidateExamination
+
+@{
+    ViewData["Title"] = "ExamSubmit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double total = 0;
+    double overall = 0;
+    int average = 0;
+}
+
+<h1>Exam Completion</h1>
+
+
+<div class="row border border-success border-2" style="margin-top:6rem">
+    <div class="col-12" id="questionBody">
+        <div class="tab-content">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="tab-pane active" id="form1">
+                        <form action="ExamSubmit" method="post">
+                            <table class="table">
+                                <thead>
+                                    <tr align="center">
+                                    <th>Topic Title</th>
+                                        <th>Maximum Marks</th>
+                                        <th>Awarded Marks</th>
+                                        <th>Success Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var examTopic in ViewBag.ExamTopics)
+                                    {
+                                        <tr align="center">
+                                            <td>@examTopic.Topic.Title</td>
+                                            <td>
+                                                @examTopic.SubjectWeight
+                                            </td>
+                                                @{
+                                                    int score = 0;
+                                                    foreach (var candidateResult in ViewBag.CandidateResults)
+                                                    {
+                                                        if (examTopic.Id == candidateResult.ExamQuestion.ExamTopics.Id)
+                                                        {
+                                                            if (candidateResult.QuestionResult > 0)
+                                                            {
+                                                                score++;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                <td>@score</td>
+ 
+                                            <td>
+                                                @{
+                                                    average++;
+                                                    total = (float)score / examTopic.SubjectWeight * 100;
+                                                    total = Math.Round((total), 2, MidpointRounding.ToEven);
+                                                    overall += total;
+                                                }
+                                                @total%
+                                            </td>
+                                        </tr>
+                                    }
+                                    
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    @if(overall >= 65)
+                    {
+                        overall = overall / average;
+                        <h3 align="center">Congratulations you have passed the certificate with: <span class="h3" style="color:green">@overall</span>%</h3>
+                    }else
+                    {
+                        <h3>You shall not pass</h3>
+                    }
+                </div>
+                <div class="row mb-5 mt-5">
+                    <hr />
+
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                        <button type="submit" id="submitbtn" class="btn btn-success" onclick="location.href = '@Url.Action("ExamPDF", "Exam", new { id = ViewBag.CandidateExamination.Id })'">Export To PDF</button>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

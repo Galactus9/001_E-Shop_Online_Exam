@@ -1,0 +1,84 @@
+﻿@model EShopOnlineExam.Models.CertTopicViewModel
+
+@{
+    ViewData["Title"] = "Create Questions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create Certificate Topic Questions</h1>
+
+<h4>Question Answers</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+<div class="position-relative m-4">
+  <div class="progress" style="height: 1px;">
+    <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="50" aria-valuemax="100"></div>
+  </div>
+  <button class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+  <button class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+  <button class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+  </div>
+  </div>
+  </div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form asp-action="CreateCertificateTopicQuestions" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Certificate.Id" class="form-control" hidden/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Certificate.Title" class="control-label"></label>
+                <input asp-for="Certificate.Title" class="form-control" disabled/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic.Title" class="control-label"></label>
+                <select asp-for="Topic.Id" class="form-control form-select" asp-items="@ViewBag.Topics" required>
+                <option value="1" class="form-control" disabled>Select Topic</option>
+                </select>
+             </div>
+            <div class="form-group">
+                <label asp-for="QuestionAnswers.TextOfQuestion" class="control-label"></label>
+                <input asp-for="QuestionAnswers.TextOfQuestion" class="form-control" required/>
+                <span asp-validation-for="QuestionAnswers.TextOfQuestion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionAnswers.Answer1" class="control-label"></label>
+                <input asp-for="QuestionAnswers.Answer1" class="form-control" required />
+                <span asp-validation-for="QuestionAnswers.Answer1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionAnswers.Answer2" class="control-label"></label>
+                <input asp-for="QuestionAnswers.Answer2" class="form-control" required />
+                <span asp-validation-for="QuestionAnswers.Answer2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionAnswers.Answer3" class="control-label"></label>
+                <input asp-for="QuestionAnswers.Answer3" class="form-control" required />
+                <span asp-validation-for="QuestionAnswers.Answer3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionAnswers.Answer4" class="control-label"></label>
+                <input asp-for="QuestionAnswers.Answer4" class="form-control" required/>
+                <span asp-validation-for="QuestionAnswers.Answer4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionAnswers.CorrectIndex" class="control-label"></label>
+                <input asp-for="QuestionAnswers.CorrectIndex" class="form-control" required min="1" max="4" />
+                <span asp-validation-for="QuestionAnswers.CorrectIndex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br />
+                <input type="submit" name="submitButton" style="float:right" value="Save and out" class="btn btn-success" />
+                <input type="submit" name="submitButton" value="Add another one" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
