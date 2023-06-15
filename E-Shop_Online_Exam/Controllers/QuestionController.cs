@@ -32,14 +32,14 @@ namespace EShopOnlineExam.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-		public IActionResult Seed()
-		{
-            Seed seed = new Seed(_unitOfWork);
-            seed.SeedDb();
-			seed.ExamSeedDb();
+		//public IActionResult Seed()
+		//{
+  //          Seed seed = new Seed(_unitOfWork);
+  //          seed.SeedDb();
+		//	seed.ExamSeedDb();
 
-            return RedirectToAction("ListOfQuestions");
-        }
+  //          return RedirectToAction("ListOfQuestions");
+  //      }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
