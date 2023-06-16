@@ -82,8 +82,8 @@ namespace EShopOnlineExam.Services
                     {
                         topics.Add(new Topic
                         {
-                            Title = $"{certificate} Topic {i}",
-                            Description = $"This is the {i} topic for Certificate of {certificate}",
+                            Title = $"{certificate.Title} Topic {i}",
+                            Description = $"This is the {i} topic for Certificate of {certificate.Description}",
                             Certificate = certificate
                         });
                     }
