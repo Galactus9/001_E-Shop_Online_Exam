@@ -75,6 +75,12 @@ The project utilizes the following technologies:
   
   Then you can buy a certificate.
   
-  ![Screenshot (4)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/41261598-b226-4582-999f-e025af2bce2e)
+  ![Screenshot (4)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/41261598-b226-4582-999f-e025af2bce2e)  
+  ![Screenshot (5)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/2186e468-1afb-43e5-9c92-00c85819648d)
+  
+  To procede to checkout use as a number cart: 4242 4242 4242 4242
+  
+  ![Screenshot (6)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/c91ca8a2-8e13-4b41-8c10-11348abb27dc)
+
 
   
