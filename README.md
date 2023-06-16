@@ -56,3 +56,18 @@ The project utilizes the following technologies:
     
     
    When you run the application a database called E-ShopOnlineExam will be created if not exist.
+   
+## User experience
+
+  There are 4 diferenent roles in this application.
+  - Candidate(User)
+  - Marker
+  - Quality Controll
+  - Admin
+  
+### User's scope
+
+  As a user first you need to register an account or login.
+  
+  ![Screenshot (2)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/0df42163-227e-4abf-a41d-c17c69bd511a)
+
