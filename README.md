@@ -34,3 +34,23 @@ The project utilizes the following technologies:
 - Stripe: A payment processor integrated into the E-Shop for secure online transactions.
 - SignalR: A library used for real-time messaging between the application and users.
 - jQuery: A JavaScript library used for enhanced interactivity and dynamic content.
+
+
+
+## How to run the application
+
+ - Step 1: Install Prerequisites
+
+    Make sure you have the .NET Core 6 SDK installed on your machine. You can download it from the official .NET website.
+    
+ - Step 2: Clone or Download the Application
+
+    Clone or download the source code of your web application from the repository or source location where it is stored.
+    
+  - Step 3: Open the Project
+
+Open the project folder using an Integrated Development Environment (IDE) such as Visual Studio 2022, Visual Studio Code, or any other suitable IDE of your choice.
+Step 4: Restore Dependencies
+
+Open a terminal or command prompt and navigate to the project's root directory.
+Run the following command to restore the project dependencies:
