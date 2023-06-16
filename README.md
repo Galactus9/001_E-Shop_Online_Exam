@@ -82,5 +82,7 @@ The project utilizes the following technologies:
   
   ![Screenshot (6)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/c91ca8a2-8e13-4b41-8c10-11348abb27dc)
 
+  Then inside MyAccount Section you can find and schedule an exam.
+  If you press start an examination prosses going to run.
 
   
