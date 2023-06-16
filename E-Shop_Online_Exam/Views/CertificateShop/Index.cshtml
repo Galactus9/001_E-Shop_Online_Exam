@@ -1,0 +1,299 @@
+﻿@model IEnumerable<EShopOnlineExam.Models.Certificate>
+
+@{
+	ViewData["Title"] = "Certifications";
+	var i = 0;
+}
+<style>
+	.card-deck .card {
+		display: inline-block;
+		width: calc((100% - 30px) / 3);
+	}
+
+	.overflow-auto {
+		max-height: 300px;
+		overflow-y: scroll;
+	}
+
+	.card:hover {
+		transform: scale(1.05);
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+		background-color: rgba(220, 100, 255,0.1);
+	}
+
+	.card-text:hover {
+		text-decoration: underline;
+	}
+</style>
+
+<div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content  bg-light">
+			<div class="modal-body text-center">
+				<h4 class="p-md-5">Your <span id="addedCertificateTitle" style="color:darkorange"></span> certificate was added to your cart.</h4>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row" style="margin-top:4rem">
+
+		<aside class="col-md-3">
+			<div class="card" style="">
+				<article class="filter-group">
+					<header class="card-header">
+						<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title" style="text-decoration: none;">
+								Filter type
+							</h6>
+						</a>
+					</header>
+					<div class="filter-content collapse show" id="collapse_1" style="">
+						<div class="card-body">
+							<form class="pb-3">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Search">
+									@*				  <div class="input-group-append">
+									<button class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+									</div>*@
+								</div>
+							</form>
+
+							<ul class="list-menu">
+								<li><a href="#">Coding  </a></li>
+								<li><a href="#">Languages </a></li>
+								<li><a href="#">Python  </a></li>
+								<li><a href="#">C# </a></li>
+								<li><a href="#">DevOps </a></li>
+								<li><a href="#">Java</a></li>
+								<li><a href="#">C++ </a></li>
+							</ul>
+
+						</div> <!-- card-body.// -->
+					</div>
+				</article> <!-- filter-group  .// -->
+				<article class="filter-group">
+					<header class="card-header">
+						<a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title">Coding </h6>
+						</a>
+					</header>
+					<div class="filter-content collapse show" id="collapse_2" style="">
+						<div class="card-body">
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" checked="" class="custom-control-input">
+								<div class="custom-control-label">
+									C++
+									<b class="badge badge-pill badge-light float-right">120</b>
+								</div>
+							</label>
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" checked="" class="custom-control-input">
+								<div class="custom-control-label">
+									C#
+									<b class="badge badge-pill badge-light float-right">15</b>
+								</div>
+							</label>
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" checked="" class="custom-control-input">
+								<div class="custom-control-label">
+									Java
+									<b class="badge badge-pill badge-light float-right">35</b>
+								</div>
+							</label>
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" checked="" class="custom-control-input">
+								<div class="custom-control-label">
+									Python
+									<b class="badge badge-pill badge-light float-right">89</b>
+								</div>
+							</label>
+
+						</div> <!-- card-body.// -->
+					</div>
+				</article> <!-- filter-group .// -->
+				<article class="filter-group">
+					<header class="card-header">
+						<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title">Price range </h6>
+						</a>
+					</header>
+					<div class="filter-content collapse show" id="collapse_3" style="">
+						<div class="card-body">
+							<input type="range" class="custom-range" min="0" max="100" name="">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Min</label>
+									<input class="form-control" placeholder="$0" type="number">
+								</div>
+								<div class="form-group text-right col-md-6">
+									<label>Max</label>
+									<input class="form-control" placeholder="$1,0000" type="number">
+								</div>
+							</div> <!-- form-row.// -->
+							<button class="btn btn-block btn-primary">Apply</button>
+						</div><!-- card-body.// -->
+					</div>
+				</article> <!-- filter-group .// -->
+				@*	<article class="filter-group">
+				<header class="card-header">
+				<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
+				<i class="icon-control fa fa-chevron-down"></i>
+				<h6 class="title">Sizes </h6>
+				</a>
+				</header>
+				<div class="filter-content collapse show" id="collapse_4" style="">
+				<div class="card-body">
+				<label class="checkbox-btn">
+				<input type="checkbox">
+				<span class="btn btn-light"> XS </span>
+				</label>
+
+				<label class="checkbox-btn">
+				<input type="checkbox">
+				<span class="btn btn-light"> SM </span>
+				</label>
+
+				<label class="checkbox-btn">
+				<input type="checkbox">
+				<span class="btn btn-light"> LG </span>
+				</label>
+
+				<label class="checkbox-btn">
+				<input type="checkbox">
+				<span class="btn btn-light"> XXL </span>
+				</label>
+				</div><!-- card-body.// -->
+				</div>
+				</article> <!-- filter-group .// -->*@
+				<article class="filter-group">
+					<header class="card-header">
+						<a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title">More filter </h6>
+						</a>
+					</header>
+					<div class="filter-content collapse in" id="collapse_5" style="">
+						<div class="card-body">
+							<label class="custom-control custom-radio">
+								<input type="radio" name="myfilter_radio" checked="" class="custom-control-input">
+								<div class="custom-control-label">Any condition</div>
+							</label>
+
+							<label class="custom-control custom-radio">
+								<input type="radio" name="myfilter_radio" class="custom-control-input">
+								<div class="custom-control-label">Brand new </div>
+							</label>
+
+							<label class="custom-control custom-radio">
+								<input type="radio" name="myfilter_radio" class="custom-control-input">
+								<div class="custom-control-label">Used items</div>
+							</label>
+
+							<label class="custom-control custom-radio">
+								<input type="radio" name="myfilter_radio" class="custom-control-input">
+								<div class="custom-control-label">Very old</div>
+							</label>
+						</div><!-- card-body.// -->
+					</div>
+				</article> <!-- filter-group .// -->
+			</div> <!-- card.// -->
+		</aside>
+		<main class="col-md-9 row row-cols-1 row-cols-md-2 g-4">
+			@foreach (var item in Model)
+			{
+				<div class="col">
+					<div class="card m-3" style="height: 100%; border-radius:10px;">
+						<a id="@item.Id" class="card-header card-title btn btn-lg" type="submit" asp-action="Details" asp-route-id="@item.Id">
+							@item.Title
+						</a>
+						<a class="card-body btn" type="submit" asp-action="Details" asp-route-id="@item.Id">
+							@item.Description
+						</a>
+						<div class="card-footer bg-success">
+							<div class="container">
+								<div class="row">
+
+									<h5 class="col-10" style="color:white">Price: @Html.DisplayFor(modelitem => item.Price)€ </h5>
+									<span name="cart" class="btn btn-primary col-2" id="addToCart-@(@item.Id)" onclick="everything(@item.Id)" value="@item.Id"><i class="bi bi-cart-plus"></i></span>
+								</div>
+								@{
+									i++;
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</main>
+	</div>
+</div>
+<script src="~/js/jquery-3.5.1.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	function addedToCart(kati) {
+		$.ajax({
+			type: "POST",
+			URL: "/CertificateShop/AddToCart",
+			data: { certId: kati },
+		});
+	}
+
+	document.querySelectorAll('span[name="cart"]').forEach(item => {
+		var cartId = item.attributes.value.value
+		item.addEventListener('click', event => {
+			$.ajax({
+				type: "GET",
+				url: "/CertificateShop/GetCartCount",
+				success: function (data) {
+					data++;
+					if (data > 0) {
+						var attributes = document.getElementById('theCart').getAttribute('class')
+						attributes = attributes + " btn-success"
+						document.getElementById('theCart').setAttribute('class', attributes)
+
+					}
+					document.getElementById('cartCounter2').innerHTML = data.toString();
+				}
+			});
+
+		})
+	})
+
+
+	function callModal(kati) {
+		console.log("modal")
+		var certificateTitle = document.getElementById(kati).innerText;
+		$("#addedCertificateTitle").text(certificateTitle);
+		$('#addToCartModal').modal('show');
+		setTimeout(function () {
+			$('#addToCartModal').modal('hide');
+		}, 1000);
+		addedToCart(kati)
+
+	}
+
+
+	function everything(kati) {
+	@if (User.Identity.IsAuthenticated)
+	{
+		<text>
+				callModal(kati);
+		</text>
+	}
+	else
+	{
+		<text>
+				window.location.href = '/Identity/Account/Login';
+		</text>
+	}
+
+		}
+
+</script>

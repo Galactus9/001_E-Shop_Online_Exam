@@ -3,6 +3,7 @@ using EShopOnlineExam.Data;
 using EShopOnlineExam.Hubs;
 using EShopOnlineExam.Repository;
 using EShopOnlineExam.Repository.IRepository;
+using EShopOnlineExam.Services;
 using EShopOnlineExam.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,15 @@ namespace EShopOnlineExam
 
             var app = builder.Build();
 
+
+            //Seed the database
+            //Seed the database
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<MyDbContext>();
+                SeedDB.Seed(context).Wait();
+            }
 
 
             // Configure the HTTP request pipeline.

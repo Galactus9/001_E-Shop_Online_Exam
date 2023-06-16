@@ -13,18 +13,31 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace EShopOnlineExam.Services
 {
-	public class Seed
+	public static class DBSeed
 	{
-        private readonly IUnitOfWork _unitOfWork;
-        public Seed(IUnitOfWork unitOfWork) 
-		{
-            _unitOfWork = unitOfWork;
-        }
 
-        public void SeedDb()
+
+        public static async Task Seed(MyDbContext db, IUnitOfWork _unitOfWork)
+        {
+
+            try
+            {
+                bool migrated = await Migrate(db);
+
+                SeedDb(_unitOfWork);
+                ExamSeedDb(_unitOfWork);
+            }
+            catch (Exception Ex)
+            {
+                throw new Exception(Ex.Message);
+            }
+        }
+        public static void SeedDb(IUnitOfWork _unitOfWork)
 		{
-			// Certificates
-			if (_unitOfWork.Certificate.GetAll().Count() == 0)
+
+
+            // Certificates
+            if (_unitOfWork.Certificate.GetAll().Count() == 0)
 			{
                 List<Certificate> certificates = new List<Certificate>();
 				var certificate1 = new Certificate
@@ -171,7 +184,7 @@ namespace EShopOnlineExam.Services
         }
 
 
-        public void ExamSeedDb()
+        public static void ExamSeedDb(IUnitOfWork _unitOfWork)
         {
             List<Exam> exams = new List<Exam>();
             var certificates = _unitOfWork.Certificate.GetAll();
@@ -201,7 +214,7 @@ namespace EShopOnlineExam.Services
             _unitOfWork.Exam.AddRange(exams);
             _unitOfWork.Save();
         }
-        public Exam SeedAnExam( int certId)
+        public static Exam SeedAnExam(IUnitOfWork _unitOfWork, int certId)
         {
             var cert = _unitOfWork.Certificate.Get(certId);
 
@@ -240,7 +253,7 @@ namespace EShopOnlineExam.Services
             _unitOfWork.Save();
 			return exam;
         }
-        public void SeedTopics( int certId)
+        public static void SeedTopics(IUnitOfWork _unitOfWork, int certId)
         {
             var cert = _unitOfWork.Certificate.Get(certId);
 
@@ -293,6 +306,37 @@ namespace EShopOnlineExam.Services
             }
             _unitOfWork.QuestionAnswers.AddRange(questionAnswers);
 
+        }
+
+
+        public static async Task<bool> Migrate(MyDbContext db)
+        {
+            try
+            {
+                Console.WriteLine("Attempting to apply migration...");
+
+                await db.Database.MigrateAsync();
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("ERROR: Tried to apply migration but failed.");
+                Console.WriteLine("Do you want to continue to drop db and update? (y/n)");
+
+                string input = Console.ReadLine();
+                if (input.Equals("y", StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Dropping the database and migrating...");
+                    await db.Database.EnsureDeletedAsync();
+                    await db.Database.MigrateAsync();
+                }
+                else if (input.Equals("n", StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Exiting program...");
+                    Environment.Exit(0);
+                }
+            }
+            return true;
         }
 
 
