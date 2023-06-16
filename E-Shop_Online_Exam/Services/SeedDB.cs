@@ -2,6 +2,8 @@
 using EShopOnlineExam.Data;
 using EShopOnlineExam.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Ocsp;
+
 
 namespace EShopOnlineExam.Services
 {
@@ -14,7 +16,10 @@ namespace EShopOnlineExam.Services
             {
                 bool migrated = await Migrate(db);
 
-                SeedStandaloneTables(db);
+                SeedCertificates(db);
+                SeedTopics(db);
+                SeedQuestionAnswers(db);
+				SeedExams(db);
 
 
             }
@@ -24,126 +29,157 @@ namespace EShopOnlineExam.Services
             }
         }
 
-        public static void SeedStandaloneTables(MyDbContext db)
+        public static void SeedCertificates(MyDbContext db)
         {
-            List<Certificate> certificates = new List<Certificate>();
-            var certificate1 = new Certificate
+            if (!db.Set<Certificate>().Any())
             {
-                Title = "DevOps",
-                Description = "DevOps",
-                PossibleMarks = 100,
-                State = CertificateStatus.Enabled,
-                Price = 100,
-
-            };
-            certificates.Add(certificate1);
-            var certificate2 = new Certificate
-            {
-                Title = "Python",
-                Description = "Python",
-                PossibleMarks = 100,
-                State = CertificateStatus.Enabled,
-                Price = 100,
-
-            };
-            certificates.Add(certificate2);
-            var certificate3 = new Certificate
-            {
-                Title = "Javascript",
-                Description = "Javascript",
-                PossibleMarks = 100,
-                State = CertificateStatus.Enabled,
-                Price = 100,
-
-            };
-            certificates.Add(certificate3);
-
-            db.Set<Certificate>().AddRange(certificates);
-            db.SaveChanges();
-
-
-            // Topic
-            List<Topic> topics = new List<Topic>();
-            foreach (Certificate certificate in certificates)
-            {
-                for(int i = 1; i <= 3; i++)
+                List<Certificate> certificates = new List<Certificate>();
+                var certificate1 = new Certificate
                 {
-                    topics.Add(new Topic
-                    {
-                        Title = $"{certificate} Topic {i}",
-                        Description = $"This is the {i} topic for Certificate of {certificate}",
-                        Certificate = certificate
-                    });
-                }
-            }
-            db.Set<Topic>().AddRange(topics);
-            db.SaveChanges();
+                    Title = "DevOps",
+                    Description = "DevOps",
+                    PossibleMarks = 100,
+                    State = Models.CertificateStatus.Enabled,
+                    Price = 100,
 
-
-            List<QuestionAnswers> questionAnswers = new List<QuestionAnswers>();
-            foreach (var topic in topics)
-            {
-                for (int i = 1; i <= 5; i++)
+                };
+                certificates.Add(certificate1);
+                var certificate2 = new Certificate
                 {
-                    int correctAnswer = new Random().Next(1, 4);
-                    QuestionAnswers q = new QuestionAnswers
-                    {
-                        // Possible answersPython
-                        Answer1 = "This is a generic answer to a question",
-                        Answer2 = "This is a generic answer to a question",
-                        Answer3 = "This is a generic answer to a question",
-                        Answer4 = "This is a generic answer to a question",
-                        CorrectIndex = correctAnswer,
+                    Title = "Python",
+                    Description = "Python",
+                    PossibleMarks = 100,
+                    State = Models.CertificateStatus.Enabled,
+                    Price = 100,
 
-                        // Question
-                        TextOfQuestion = $"This is an example of a Question and the correct answer is: {correctAnswer}",
-                        Topics = topic
-                    };
-                    questionAnswers.Add(q);
-                }
+                };
+                certificates.Add(certificate2);
+                var certificate3 = new Certificate
+                {
+                    Title = "Javascript",
+                    Description = "Javascript",
+                    PossibleMarks = 100,
+                    State = Models.CertificateStatus.Enabled,
+                    Price = 100,
+
+                };
+                certificates.Add(certificate3);
+
+                db.Set<Certificate>().AddRange(certificates);
+                db.SaveChanges();
             }
-            db.Set<QuestionAnswers>().AddRange(questionAnswers);
-            db.SaveChanges();
         }
-
-        public static Exam SeedAnExam(IUnitOfWork _unitOfWork, int certId)
+        public static void SeedTopics(MyDbContext db)
         {
-            var cert = _unitOfWork.Certificate.Get(certId);
-
-
-            Random rnd = new Random();
-            List<int> subjectWeight = new List<int>();
-            subjectWeight.Add(rnd.Next(1, 5));
-            subjectWeight.Add(rnd.Next(1, 5));
-            subjectWeight.Add(rnd.Next(1, 5));
-            var exam = new Exam { Certificate = cert };
-            var examTopics = new List<ExamTopics>();
-            List<Topic> topics = (List<Topic>)_unitOfWork.Topic.GetTopicByCertificate(cert.Id);
-            for (int i = 0; i < topics.Count(); i++)
+            // Topic
+            if (!db.Set<Topic>().Any())
             {
-                var examTopic = new ExamTopics { Topic = topics[i], Exam = exam, SubjectWeight = subjectWeight[i] };
-                examTopics.Add(examTopic);
-                List<ExamQuestion> examQuestions = new List<ExamQuestion>();
-                List<int> randomNumbers = new List<int>();
-                ICollection<QuestionAnswers> topicQuestion = _unitOfWork.QuestionAnswers.WhereTopicId(topics[i].Id);
-                while (randomNumbers.Count < topicQuestion.Count())
+                List<Topic> topics = new List<Topic>();
+                List<Certificate> certificates = db.Set<Certificate>().ToList();
+                foreach (Certificate certificate in certificates)
                 {
-                    int newNum = rnd.Next(topicQuestion.First().Id, topicQuestion.Last().Id); // generates a random number between 1 and 100
-                    if (!randomNumbers.Contains(newNum))
+                    for (int i = 1; i <= 3; i++)
                     {
-                        randomNumbers.Add(newNum);
-                        ExamQuestion question = new ExamQuestion { ExamTopics = examTopic, QuestionAnswer = _unitOfWork.QuestionAnswers.Get(newNum) };
-                        examQuestions.Add(question);
+                        topics.Add(new Topic
+                        {
+                            Title = $"{certificate} Topic {i}",
+                            Description = $"This is the {i} topic for Certificate of {certificate}",
+                            Certificate = certificate
+                        });
                     }
                 }
-                _unitOfWork.ExamQuestion.AddRange(examQuestions);
+                db.Set<Topic>().AddRange(topics);
+                db.SaveChanges();
             }
-            _unitOfWork.ExamTopic.AddRange(examTopics);
-            exam.ExamDuration = 600;
+        }
+        public static void SeedQuestionAnswers(MyDbContext db)
+        {
 
-            _unitOfWork.Exam.Add(exam);
-            _unitOfWork.Save();
-            return exam;
+            if (!db.Set<QuestionAnswers>().Any())
+            {
+                List<Topic> topics = db.Set<Topic>().ToList();
+                List<QuestionAnswers> questionAnswers = new List<QuestionAnswers>();
+                foreach (var topic in topics)
+                {
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        int correctAnswer = new Random().Next(1, 4);
+                        QuestionAnswers q = new QuestionAnswers
+                        {
+                            // Possible answersPython
+                            Answer1 = "This is a generic answer to a question",
+                            Answer2 = "This is a generic answer to a question",
+                            Answer3 = "This is a generic answer to a question",
+                            Answer4 = "This is a generic answer to a question",
+                            CorrectIndex = correctAnswer,
+
+                            // Question
+                            TextOfQuestion = $"This is an example of a Question and the correct answer is: {correctAnswer}",
+                            Topics = topic
+                        };
+                        questionAnswers.Add(q);
+                    }
+                }
+                db.Set<QuestionAnswers>().AddRange(questionAnswers);
+                db.SaveChanges(); 
+            }
+        }
+
+
+
+        public static void SeedExams(MyDbContext db)
+        {
+            List<Certificate>? certificates = db.Set<Certificate>().ToList();
+            foreach(var cert in certificates)
+            {
+                if (!db.Set<Exam>().Where(x =>x.Certificate.Id == cert.Id).Any())
+                {
+                    var exam = new Exam 
+                    {
+                        Certificate = cert,
+                        ExamDate = DateTime.Now,
+                        ExamDuration = 600
+                    };
+
+                    var examTopics = new List<ExamTopics>();
+
+                    List<Topic> topics = db.Set<Topic>()
+                        .Where(x => x.Certificate.Id == cert.Id)
+                        .Include(x => x.Certificate)
+                        .ToList();
+
+                    for (int i = 0; i < topics.Count(); i++)
+                    {
+                        ExamTopics examTopic = new()
+                        {
+                            Topic = topics[i],
+                            Exam = exam,
+                            SubjectWeight = 3
+                        };
+                        examTopics.Add(examTopic);
+
+                        List<ExamQuestion> examQuestions = new List<ExamQuestion>();
+                        List<QuestionAnswers> topicQuestion = db.Set<QuestionAnswers>()
+                                                                .Include(x => x.Topics)
+                                                                .Where(x => x.Topics.Id == topics[i].Id)
+                                                                .ToList();
+                        for (int k = 0; k < examTopic.SubjectWeight; k++)
+                        {
+                            ExamQuestion question = new ExamQuestion
+                            {
+                                ExamTopics = examTopic,
+                                QuestionAnswer = topicQuestion[k]
+							};
+                            examQuestions.Add(question);
+                            db.Set<ExamQuestion>().AddRange(examQuestions);
+                        }
+                    }
+                    db.Set<ExamTopics>().AddRange(examTopics);
+
+                    db.Set<Exam>().Add(exam);
+                    db.SaveChanges(); 
+                }
+            }
         }
 
 
