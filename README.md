@@ -42,9 +42,6 @@ The project utilizes the following technologies:
  - Step 1: Install Prerequisites
 
     Make sure you have the .NET Core 6 SDK installed on your machine. You can download it from the official .NET website.   
-    <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">
-    <img src="https://skillicons.dev/icons?i=.Net" />
-  </a>
     Also you will need SQL Server Management Studio (SSMS).You can download it from the official .NET website.
     
  - Step 2: Clone or Download the Application
