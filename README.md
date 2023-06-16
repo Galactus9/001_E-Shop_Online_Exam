@@ -84,5 +84,9 @@ The project utilizes the following technologies:
 
   Then inside MyAccount Section you can find and schedule an exam.
   If you press start an examination prosses going to run.
+  
+  In casse you get disconected form your examination the system can provide you the ability to reconect
+  and continiune the prosses. if you had answered questions they will be propably seved once the programme 
+  gets a time stamp of your examination every 10 seconds
 
   
