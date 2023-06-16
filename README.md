@@ -53,3 +53,6 @@ The project utilizes the following technologies:
     dotnet build
  - Step 6: Run the Application
     dotnet run
+    
+    
+   When you run the application a database called E-ShopOnlineExam will be created if not exist.
