@@ -72,3 +72,9 @@ The project utilizes the following technologies:
   ![Screenshot (2)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/0df42163-227e-4abf-a41d-c17c69bd511a)
 
   ![Screenshot (3)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/08edfc66-886c-459a-bc3c-a0e96d3c449b)
+  
+  Then you can buy a certificate.
+  
+  ![Screenshot (4)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/41261598-b226-4582-999f-e025af2bce2e)
+
+  
