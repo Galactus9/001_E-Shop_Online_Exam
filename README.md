@@ -91,4 +91,14 @@ The project utilizes the following technologies:
   and continiune the prosses. if you had answered questions they will be propably seved once the programme 
   gets a time stamp of your examination every 10 seconds
 
+  When you submit your answers you will be able to download your certificate results in PDF
   
+  
+  
+  In users section you will be able to change your role to see the full fanctionality of the application
+  
+  ![Screenshot (9)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/c1993c27-4530-4235-b758-de40b170b409)
+
+  As a Quality controll you will be able to report bugs and ideas using the book in the top right corner
+  Those reports will be apear to Admins under Manage Account section inside the Reports.
+  That feature will apear to you only in case you are an Admin.
