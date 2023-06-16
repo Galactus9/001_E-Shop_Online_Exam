@@ -71,6 +71,7 @@
                     @if(overall >= 65)
                     {
                         overall = overall / average;
+                        overall = Math.Round((overall), 2, MidpointRounding.ToEven);
                         <h3 align="center">Congratulations you have passed the certificate with: <span class="h3" style="color:green">@overall</span>%</h3>
                     }else
                     {
