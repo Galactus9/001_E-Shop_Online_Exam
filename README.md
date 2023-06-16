@@ -45,7 +45,7 @@ The project utilizes the following technologies:
     
  - Step 2: Clone or Download the Application
 
-    Clone or download the source code of your web application from the repository or source location where it is stored.
+    Clone or download the source code.
     
   - Step 3: Open the Project
 
