@@ -85,6 +85,8 @@ The project utilizes the following technologies:
   Then inside MyAccount Section you can find and schedule an exam.
   If you press start an examination prosses going to run.
   
+  ![Screenshot (7)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/d1e1b5f7-90a2-4ffd-820b-7690ccf96024)
+
   In casse you get disconected form your examination the system can provide you the ability to reconect
   and continiune the prosses. if you had answered questions they will be propably seved once the programme 
   gets a time stamp of your examination every 10 seconds
