@@ -88,7 +88,8 @@ The project utilizes the following technologies:
   ![Screenshot (7)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/d1e1b5f7-90a2-4ffd-820b-7690ccf96024)
 
   In case you get disconnected from your examination, the system can provide you the ability to reconnect and continue the prosses.
-  if you had answered questions, they will be probably saved once the program gets a timestamp of your examination every 10 seconds.
+  
+  Ιf you had answered questions, they will be probably saved once the program gets a timestamp of your examination every 10 seconds.
 
   When you submit your answers, you will be able to download your certificate results in PDF.
   
