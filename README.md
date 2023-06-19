@@ -87,15 +87,13 @@ The project utilizes the following technologies:
   
   ![Screenshot (7)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/d1e1b5f7-90a2-4ffd-820b-7690ccf96024)
 
-  In casse you get disconected form your examination the system can provide you the ability to reconect
-  and continiune the prosses. if you had answered questions they will be propably seved once the programme 
-  gets a time stamp of your examination every 10 seconds
+  In case you get disconnected from your examination, the system can provide you the ability to reconnect and continue the prosses.
+  if you had answered questions, they will be probably saved once the program gets a timestamp of your examination every 10 seconds.
 
-  When you submit your answers you will be able to download your certificate results in PDF
+  When you submit your answers, you will be able to download your certificate results in PDF.
   
-  
-  
-  In users section you will be able to change your role to see the full fanctionality of the application
+  In the user’s section, you will be able to change your role to see the full functionality of the application.
+
   
   ![Screenshot (9)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/c1993c27-4530-4235-b758-de40b170b409)
 
