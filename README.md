@@ -104,6 +104,7 @@ The project utilizes the following technologies:
 
   That feature will appear to you only in case you are an Admin.
   
+  <br/>
   
   In Admin Actions you can find and proceed with CRUD operations,
   
@@ -114,6 +115,8 @@ The project utilizes the following technologies:
   By the moment the marker manages the task will wait in the Admins Actions for acceptance. 
   
   In case the admin accepts the marker’s work the task will be characterized as closed,
-  
+
   If deny the task will return to the marker to do it again.
+  
+    ![Screenshot (11)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/69bb2010-06fe-41e8-95e9-896c2b91d8ef)
 
