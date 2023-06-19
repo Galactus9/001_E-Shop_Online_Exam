@@ -118,5 +118,5 @@ The project utilizes the following technologies:
 
   If deny the task will return to the marker to do it again.
   
-    ![Screenshot (11)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/69bb2010-06fe-41e8-95e9-896c2b91d8ef)]
+  ![Screenshot (11)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/69bb2010-06fe-41e8-95e9-896c2b91d8ef)
 
