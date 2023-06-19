@@ -103,3 +103,17 @@ The project utilizes the following technologies:
   Those reports will appear to Admins under the Manage Account section inside the Reports. 
 
   That feature will appear to you only in case you are an Admin.
+  
+  
+  In Admin Actions you can find and proceed with CRUD operations,
+  
+  The to-do list at the bottom of Admin Actions is a section where you can assign a marking task to a marker.
+  
+  When a task is assigned, the marker can find it in Marker Actions.
+  
+  By the moment the marker manages the task will wait in the Admins Actions for acceptance. 
+  
+  In case the admin accepts the marker’s work the task will be characterized as closed,
+  
+  If deny the task will return to the marker to do it again.
+
