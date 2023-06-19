@@ -99,5 +99,7 @@ The project utilizes the following technologies:
   ![Screenshot (9)](https://github.com/Galactus9/001_E-Shop_Online_Exam/assets/117937168/c1993c27-4530-4235-b758-de40b170b409)
 
   As a Quality control, you will be able to report bugs and ideas using the book in the top right corner.
+
   Those reports will appear to Admins under the Manage Account section inside the Reports. 
+
   That feature will appear to you only in case you are an Admin.
